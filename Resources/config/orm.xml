@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+
+<container xmlns="http://symfony.com/schema/dic/services"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <parameters>
+        <parameter key="mqm_statistic.statistic_manager.class">MQM\StatisticBundle\Entity\StatisticManager</parameter>
+        <parameter key="mqm_order.model.statistic.class">MQM\StatisticBundle\Entity\Statistic</parameter>
+        <parameter key="mqm_order.model.statistic_item.class">MQM\StatisticBundle\Entity\StatisticItem</parameter>
+        <parameter key="mqm_statistic.statistic_factory.class">MQM\StatisticBundle\Entity\StatisticFactory</parameter>
+    </parameters>
+
+    <services>
+        <service id="mqm_statistic.statistic_manager" class="%mqm_statistic.statistic_manager.class%" public="true">
+            <argument type="service" id="mqm_statistic.entity_manager" />
+            <argument type="service" id="mqm_statistic.statistic_factory" />
+        </service>
+        
+        <service id="mqm_statistic.statistic_factory" class="%mqm_statistic.statistic_factory.class%" public="true">
+        <argument>%mqm_order.model.statistic.class%</argument>
+        <argument>%mqm_order.model.statistic_item.class%</argument>
+        </service>
+        
+        <service id="mqm_statistic.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="false">
+        </service>        
+    </services>
+    
+</container>

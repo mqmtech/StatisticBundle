@@ -1,0 +1,7 @@
+parameters:
+#    mqm_statistic.example.class: MQM\StatisticBundle\Example
+
+services:
+#    mqm_statistic.example:
+#        class: %mqm_statistic.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
