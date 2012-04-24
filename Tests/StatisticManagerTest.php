@@ -2,9 +2,9 @@
 
 namespace MQM\StatisticBundle\Test\Statistic;
 
-use MQM\StatisticBundle\Statistic\StatisticInterface;
-use MQM\StatisticBundle\Model\StatisticManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Tests\Functional\AppKernel;
+
+
+
 
 class StatisticManagerTest extends \Symfony\Bundle\FrameworkBundle\Test\WebTestCase
 {   
