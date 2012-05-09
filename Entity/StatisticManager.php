@@ -144,6 +144,27 @@ class StatisticManager implements StatisticManagerInterface
 
         return $query->getResult();
     }
+
+    public function findMostSoldProducts(SortManagerInterface $sortManager = null, PaginationInterface $pagination = null)
+    {
+        $className = $this->getClassFromAlias('orderItemStatistic');
+        $qb = $this->entityManager->createQueryBuilder();
+        $qb ->select('s')
+            ->addSelect('sum(s.quantity) as counter')
+            ->from($className, ' s')
+            ->join('s.product', 'p')
+            ->addGroupBy('p');
+        $query = $qb->getQuery();
+
+        if ($sortManager) {
+            $query = $sortManager->sortQuery($query, 'p');
+        }
+        if ($pagination) {
+            $query = $pagination->paginateQuery($query);
+        }
+
+        return $query->getResult();
+    }
     
     /**
      *

@@ -50,6 +50,15 @@ class OrderItemStatistic extends Statistic
      */
     private $totalBasePrice;
 
+    /**
+     *
+     * @var Product $product;
+     *
+     * @ORM\ManyToOne(targetEntity="MQM\StatisticBundle\Entity\Product", cascade={"persist"})
+     * @ORM\JoinColumn(name="productId", referencedColumnName="id", nullable=true)
+     */
+    private $product;
+
     public function __construct(){
         parent::__construct();
     }
@@ -136,5 +145,21 @@ class OrderItemStatistic extends Statistic
     public function getTotalBasePrice()
     {
         return $this->totalBasePrice;
+    }
+
+    /**
+     * @param \MQM\StatisticBundle\Entity\Product $product
+     */
+    public function setProduct($product)
+    {
+        $this->product = $product;
+    }
+
+    /**
+     * @return \MQM\StatisticBundle\Entity\Product
+     */
+    public function getProduct()
+    {
+        return $this->product;
     }
 }

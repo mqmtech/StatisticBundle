@@ -31,13 +31,6 @@ class OrderStatistic extends Statistic
     private $orderId;
 
     /**
-     * @var \DateTime $checkoutAt
-     *
-     * @ORM\Column(name="checkoutAt", type="datetime", nullable=true)
-     */
-    private $checkoutAt;
-
-    /**
      * Result of totalBasePrice * tax
      * @var float $taxPrice
      *
@@ -68,22 +61,6 @@ class OrderStatistic extends Statistic
 
     public function __toString(){
         return '' . $this->getOrderId();
-    }
-
-    /**
-     * @param \DateTime $checkoutAt
-     */
-    public function setCheckoutAt($checkoutAt)
-    {
-        $this->checkoutAt = $checkoutAt;
-    }
-
-    /**
-     * @return \DateTime
-     */
-    public function getCheckoutAt()
-    {
-        return $this->checkoutAt;
     }
 
     /**
