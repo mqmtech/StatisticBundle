@@ -10,26 +10,26 @@ interface StatisticManagerInterface
     /**
      * @return StatisticInterface
      */
-    public function createStatistic();
+    public function createStatistic($name);
 
     /**
-     * @return StatisticEntryInterface
+     * @return mixed
      */
-    public function createEntry();
+    public function createDimension($name);
     
     /**
      *
      * @param StatisticEntryInterface $statistic
      * @param boolean $andFlush 
      */
-    public function saveStatistic(StatisticInterface $statistic, $andFlush = true);
+    public function save(StatisticInterface $statistic, $andFlush = true);
     
     /**
      *
      * @param StatisticEntryInterface $statistic
      * @param boolean $andFlush 
      */
-    public function deleteStatistic(StatisticInterface $statistic, $andFlush = true);
+    public function delete(StatisticInterface $statistic, $andFlush = true);
     
     /**
      * @return StatisticManagerIngerface 
@@ -40,17 +40,10 @@ interface StatisticManagerInterface
      * @param array $criteria
      * @return StatisticEntryInterface 
      */
-    public function findStatisticBy(array $criteria);
+    public function findOneBy(array $criteria, $name);
     
     /**
      * @return array 
      */
-    public function findStatistics();
-    
-    /**
-     * @param string targetDomain
-     * @param integer targetId
-     * @return integer 
-     */
-    public function findEntriesCountByStatisticTargetDomainAndTargetId($targetDomain, $targetId);
+    public function findAll($name);
 }

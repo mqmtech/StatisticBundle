@@ -6,20 +6,33 @@
 
     <parameters>
         <parameter key="mqm_statistic.statistic_manager.class">MQM\StatisticBundle\Entity\StatisticManager</parameter>
-        <parameter key="mqm_order.model.statistic.class">MQM\StatisticBundle\Entity\Statistic</parameter>
-        <parameter key="mqm_order.model.statistic_item.class">MQM\StatisticBundle\Entity\StatisticItem</parameter>
+        <parameter key="mqm_order.model.product_view_statistic.class">MQM\StatisticBundle\Entity\ProductViewStatistic</parameter>
+        <parameter key="mqm_order.model.order_item_statistic.class">MQM\StatisticBundle\Entity\OrderItemStatistic</parameter>
+        <parameter key="mqm_order.model.order_statistic.class">MQM\StatisticBundle\Entity\OrderStatistic</parameter>
+        <parameter key="mqm_order.model.product.class">MQM\StatisticBundle\Entity\Product</parameter>
         <parameter key="mqm_statistic.statistic_factory.class">MQM\StatisticBundle\Entity\StatisticFactory</parameter>
+        <parameter key="mqm_statistic.statistics" type="collection">
+            <parameter type="string" key="productViewStatistic">%mqm_order.model.product_view_statistic.class%</parameter>
+            <parameter type="string" key="orderStatistic">%mqm_order.model.order_statistic.class%</parameter>
+            <parameter type="string" key="orderItemStatistic">%mqm_order.model.order_item_statistic.class%</parameter>
+        </parameter>
+
+        <parameter key="mqm_statistic.dimensions" type="collection">
+            <parameter type="string" key="product">%mqm_order.model.product.class%</parameter>
+        </parameter>
     </parameters>
 
     <services>
-        <service id="mqm_statistic.statistic_manager" class="%mqm_statistic.statistic_manager.class%" public="true">
+        <service id="mqm_statistic.statistic_manager" class="%mqm_statistic.statistic_manager.class%" public="true" scope="request">
             <argument type="service" id="mqm_statistic.entity_manager" />
-            <argument type="service" id="mqm_statistic.statistic_factory" />
+            <argument>%mqm_statistic.statistics%</argument>
+            <argument>%mqm_statistic.dimensions%</argument>
+            <argument type="service" id="security.context" />
+            <argument type="service" id="request"/>
         </service>
         
         <service id="mqm_statistic.statistic_factory" class="%mqm_statistic.statistic_factory.class%" public="true">
-        <argument>%mqm_order.model.statistic.class%</argument>
-        <argument>%mqm_order.model.statistic_item.class%</argument>
+            <argument>%mqm_order.model.product_view_statistic.class%</argument>
         </service>
         
         <service id="mqm_statistic.entity_manager" factory-service="doctrine" factory-method="getEntityManager" class="Doctrine\ORM\EntityManager" public="false">

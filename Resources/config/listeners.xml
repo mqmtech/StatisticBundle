@@ -9,7 +9,7 @@
     </parameters>
 
     <services>
-        <service id="mqm_statistic.event_listener.request" class="%mqm_statistic.event_listener.request.class%" public="true">
+        <service id="mqm_statistic.event_listener.request" class="%mqm_statistic.event_listener.request.class%" public="true" scope="request" >
             <tag name="kernel.event_listener" event="kernel.request" method="onKernelRequest" />
             <argument type="service" id="mqm_statistic.statistic_manager" />
         </service>

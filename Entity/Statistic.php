@@ -7,50 +7,10 @@ use MQM\StatisticBundle\Model\StatisticEntryInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- *
- * @ORM\Table(name="mqm_statistic")
- * @ORM\Entity(repositoryClass="MQM\StatisticBundle\Entity\StatisticRepository")
- * @ORM\HasLifecycleCallbacks
+ * @ORM\MappedSuperClass
  */
-class Statistic implements StatisticInterface
+abstract class Statistic implements StatisticInterface
 {
-    /**
-     * @var integer $id
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-    
-    /**
-     * @var string $targetDomain
-     *
-     * @ORM\Column(name="targetDomain", type="string", length=255, nullable=true)
-     */
-    private $targetDomain;
-    
-    /**
-     * @var string $targetId
-     *
-     * @ORM\Column(name="targetId", type="string", length=255, nullable=true)
-     */
-    private $targetId;
-
-    /**
-     * @var string $name
-     *
-     * @ORM\Column(name="name", type="string", length=255, nullable=true)
-     */
-    private $name;
-
-    /**
-     * @var text $description
-     *
-     * @ORM\Column(name="description", type="text", nullable=true)
-     */
-    private $description;
-    
     /**
      * @var \DateTime $createdAt
      *
@@ -59,61 +19,25 @@ class Statistic implements StatisticInterface
     private $createdAt;
 
     /**
-     * @var \DateTime $modifiedAt
+     * @var string $username
      *
-     * @ORM\Column(name="modifiedAt", type="datetime", nullable=true)
+     * @ORM\Column(name="username", type="string", length=255, nullable=true)
      */
-    private $modifiedAt;
+    private $username;
 
     /**
-     * @ORM\OneToMany(targetEntity="MQM\StatisticBundle\Entity\StatisticEntry", mappedBy="statistic")
-     * @var array $entries
+     * @var string $ip
+     *
+     * @ORM\Column(name="ip", type="string", length=255, nullable=true)
      */
-    private $entries;
+    private $ip;
     
     public function __construct(){
         $this->createdAt = new \DateTime();
     }
     
     public function __toString(){
-        return '' . $this->getName();
-    }
-    
-     /**
-     * Invoked before the entity is updated.
-     *
-     * @ORM\PreUpdate
-     */
-    protected function preUpdate()
-    {
-        $this->updatedAt = new \DateTime();
-    }
-    
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function setEntries(array $entries){
-        $this->entries = $entries;
-    }
-    
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function getEntries(){
-        return $this->entries;
-    }
-    
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function addEntry(StatisticEntryInterface $entry)
-    {
-        if (!in_array($entry, $this->entries, true)) {
-            $this->roles[] = $entry;
-        }
+        return '' . $this->getId();
     }
     
     /**
@@ -124,42 +48,6 @@ class Statistic implements StatisticInterface
     {
         return $this->id;
     }
-
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-    }
-
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-    }
-
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
     
     /**
      *
@@ -168,6 +56,8 @@ class Statistic implements StatisticInterface
     public function setCreatedAt($createdAt)
     {
         $this->createdAt = $createdAt;
+
+        return $this;
     }
 
     /**
@@ -180,56 +70,38 @@ class Statistic implements StatisticInterface
     }
 
     /**
-     *
-     * {@inheritDoc}
+     * @param string $username
      */
-    public function setModifiedAt($modifiedAt)
+    public function setUsername($username)
     {
-        $this->modifiedAt = $modifiedAt;
+        $this->username = $username;
+
+        return $this;
     }
 
     /**
-     *
-     * {@inheritDoc}
+     * @return string
      */
-    public function getModifiedAt()
+    public function getUsername()
     {
-        return $this->modifiedAt;
-    }
-    
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function getTargetDomain()
-    {
-        return $this->targetDomain;
+        return $this->username;
     }
 
     /**
-     *
-     * {@inheritDoc}
+     * @param string $ip
      */
-    public function setTargetDomain($targetDomain)
+    public function setIp($ip)
     {
-        $this->targetDomain = $targetDomain;
+        $this->ip = $ip;
+
+        return $this;
     }
 
     /**
-     *
-     * {@inheritDoc}
+     * @return string
      */
-    public function getTargetId()
+    public function getIp()
     {
-        return $this->targetId;
-    }
-
-    /**
-     *
-     * {@inheritDoc}
-     */
-    public function setTargetId($targetId)
-    {
-        $this->targetId = $targetId;
+        return $this->ip;
     }
 }

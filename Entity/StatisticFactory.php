@@ -7,43 +7,24 @@ use MQM\StatisticBundle\Model\StatisticFactoryInterface;
 class StatisticFactory implements StatisticFactoryInterface
 {    
     private $statisticClass;
-    private $entryClass;
-    
-    public function __construct($statisticClass, $entryClass)
+
+    public function __construct($statisticClass, $entryClass = null)
     {
         $this->statisticClass = $statisticClass;
-        $this->entryClass = $entryClass;
     }
     
     /**
      * {@inheritDoc} 
      */
-    public function createStatistic()
+    public function createStatistic($name = null)
     {
         return new $this->statisticClass();
     }
-    
-    /**
-     * {@inheritDoc} 
-     */
-    public function createEntry()
-    {
-        return new $this->entryClass();
-    }
-    
     /**
      * {@inheritDoc} 
      */
     public function getStatisticClass()
     {
         return $this->statisticClass;
-    }
-    
-    /**
-     * {@inheritDoc} 
-     */
-    public function getEntryClass()
-    {
-        return $this->entryClass;
     }
 }
