@@ -7,7 +7,7 @@ use MQM\StatisticBundle\Model\StatisticEntryInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\MappedSuperClass
+ * @ORM\MappedSuperclass
  */
 abstract class Statistic implements StatisticInterface
 {
