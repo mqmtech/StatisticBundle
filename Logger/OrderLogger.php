@@ -70,7 +70,7 @@ class OrderLogger implements LoggerInterface
         return $productDimension;
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
         );

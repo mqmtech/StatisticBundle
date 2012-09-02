@@ -6,5 +6,5 @@ interface LoggerInterface
 {
     public function logStatistic();
 
-    public function getDefaultOptions();
+    public function getDefaultOptions(array $options);
 }

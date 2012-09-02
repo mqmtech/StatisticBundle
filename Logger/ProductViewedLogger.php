@@ -32,7 +32,7 @@ class ProductViewedLogger implements LoggerInterface
         $this->statisticManager->save($productViewStatistic, true);
     }
 
-    public function getDefaultOptions()
+    public function getDefaultOptions(array $options)
     {
         return array(
         );
