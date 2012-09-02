@@ -17,7 +17,7 @@ class OrderLogger implements LoggerInterface
     }
     public function logStatistic($options = array())
     {
-        $options = $options + $this->getDefaultOptions();
+        $options = $options + $this->getDefaultOptions(array());
         if (!isset($options['order'])) {
             throw new \Exception('The order is not set in log statistics options');
         }
